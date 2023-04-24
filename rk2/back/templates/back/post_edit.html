@@ -1,0 +1,14 @@
+{% load static %}
+{% block content %}
+  <h1>Edit Post</h1>
+  <link rel="stylesheet" href="{% static 'edit.css' %}">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+  <h2>Post Information</h2>
+  <p><strong>Title:</strong> {{ post.title }}</p>
+  <p><strong>Author:</strong> {{ post.author.username }}</p>
+{% endblock %}

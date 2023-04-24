@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Posts</title>
+  <link rel="stylesheet" href="{% static 'list.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+        <div class="user-nav">
+            {% if user.is_authenticated %}
+            <div class="user-info">
+              <p>Welcome, {{ user.username }}!</p>
+              <a class="ky" href="{% url 'post_create' %}" class="btn">Add Post</a>
+              <a class="kn" href="{% url 'logout' %}?next={{ request.path }}" class="btn">Logout</a>
+            </div>
+            {% else %}
+            <div class="user-info">
+              <a href="{% url 'register' %}" class="btn">Register</a>
+              <a href="{% url 'login' %}" class="btn">Login</a>
+            </div>
+            {% endif %}
+          </div>
+          {% if posts %}
+          <ul class="post-list">
+            {% for post in posts %}
+            <li class="pos"><a href="{% url 'post_detail' post.pk %}">{{ forloop.counter }}. {{ post.text }}</a></li>
+            <li>Author: {{ post.author }}</li>
+              {% endfor %}
+            </li>
+          </ul>
+          {% else %}
+          <p>No posts yet.</p>
+          {% endif %}

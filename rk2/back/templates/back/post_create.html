@@ -1,0 +1,10 @@
+{% load static %}
+{% block content %}
+    <h1>Create Post</h1>
+    <link rel="stylesheet" href="{% static 'create.css' %}">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
